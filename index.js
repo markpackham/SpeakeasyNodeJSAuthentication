@@ -17,6 +17,7 @@ app.get("/api", (req, res) =>
 );
 
 // Register user & create a temporary secret
+// Need to use Insominia or Postman to check
 //localhost:5000/api/register
 http: app.post("/api/register", (req, res) => {
   const id = uuid.v4();
@@ -33,6 +34,11 @@ http: app.post("/api/register", (req, res) => {
 });
 
 // Verify token and make secret permnant
+// Need to use Insominia or Postman to check and use JSON
+// localhost:5000/api/verify
+/*
+
+*/
 app.post("/api/verify", (req, res) => {
   const { token, userId } = req.body;
 
