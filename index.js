@@ -14,6 +14,21 @@ app.get("/api", (req, res) =>
   res.json({ message: "Welcome to the 2 factor auth example" })
 );
 
+// Register user & create a temporary secret
+app.post("/api/register", (req, res) => {
+  const id = uuid.v4();
+
+  try {
+    const path = `/user/${id}`;
+    const temp_secret = speakeasy.generateSecret();
+    db.push(path, { i, temp_secret });
+    res.json({ id, secret: temp_secret });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error generating secret" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`App is running on PORT: ${PORT}.`);
 });
